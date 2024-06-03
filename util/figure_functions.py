@@ -12,8 +12,9 @@ import figurefirst as fifi
 import fly_plot_lib_plot as fpl
 import utils
 
+
 class FlyWindVectors:
-    def __init__(self, phi=np.pi/4, g=0.4, psi=np.pi/10, w=0.3, zeta=-np.pi/4):
+    def __init__(self, phi=np.pi / 4, g=0.4, psi=np.pi / 10, w=0.3, zeta=-np.pi / 4):
         """ Calculate air velocity vector from fly heading angle,
             ground velocity vector, and ambient wind velocity vector.
         """
@@ -111,10 +112,10 @@ class FlyWindVectors:
         self.run()
 
     def plot(self, ax=None, fly_origin=(0, 0), axis_size=None, axis_neg=True, show_arrow=True, fig_size=6,
-             phi_color=(128/255, 128/255, 128/255),
-             g_color=(32/255, 0/255, 255/255),
-             a_color=(240/255, 118/255, 0/255),
-             w_color=(47/255, 166/255, 0/255),
+             phi_color=(128 / 255, 128 / 255, 128 / 255),
+             g_color=(32 / 255, 0 / 255, 255 / 255),
+             a_color=(240 / 255, 118 / 255, 0 / 255),
+             w_color=(47 / 255, 166 / 255, 0 / 255),
              lw=1.5, alpha=1.0):
 
         """ Plot fly wind vectors.
@@ -123,7 +124,7 @@ class FlyWindVectors:
         fly_origin = np.array(fly_origin)
 
         if axis_size is None:
-            axis_size = 1.05*np.max(np.array([self.w, self.g, self.a]))
+            axis_size = 1.05 * np.max(np.array([self.w, self.g, self.a]))
 
         if ax is None:
             fig, ax = plt.subplots(1, 1, figsize=(fig_size, fig_size), dpi=100)
@@ -131,8 +132,8 @@ class FlyWindVectors:
             self.ax = ax
 
         # Plot axes
-        ax.plot([axis_size, -axis_neg*axis_size], [0, 0], '--', linewidth=1.0, color='gray')
-        ax.plot([0.0, 0.0], [-axis_neg*axis_size, axis_size], '--', linewidth=1.0, color='gray')
+        ax.plot([axis_size, -axis_neg * axis_size], [0, 0], '--', linewidth=1.0, color='gray')
+        ax.plot([0.0, 0.0], [-axis_neg * axis_size, axis_size], '--', linewidth=1.0, color='gray')
 
         # Plot fly-wind vectors
         ax.plot([fly_origin[0], fly_origin[0] + self.phi_x], [fly_origin[1], fly_origin[1] + self.phi_y], '-',
@@ -187,19 +188,22 @@ class FlyWindVectors:
 
         fifi.mpl_functions.adjust_spines(ax, [])
 
-def plot_trajectory_fly(df):
+
+def plot_trajectory_fly(df, arrow_size=None):
     fig, ax = plt.subplots()
     plot_trajectory(df.xpos.values,
                     df.ypos.values,
                     df.phi.values,
                     df.time.values,
                     ax=ax,
-                    size_radius=None,
+                    size_radius=arrow_size,
                     nskip=0,
                     colormap='bone_r',
                     colornorm=None,
                     edgecolor='none',
                     reverse=False)
+
+    fifi.mpl_functions.adjust_spines(ax, [])
 
 
 def plot_trajectory(xpos, ypos, phi, color, ax=None, size_radius=None, nskip=0,
