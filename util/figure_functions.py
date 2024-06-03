@@ -187,6 +187,20 @@ class FlyWindVectors:
 
         fifi.mpl_functions.adjust_spines(ax, [])
 
+def plot_trajectory_fly(df):
+    fig, ax = plt.subplots()
+    plot_trajectory(df.xpos.values,
+                    df.ypos.values,
+                    df.phi.values,
+                    df.time.values,
+                    ax=ax,
+                    size_radius=None,
+                    nskip=0,
+                    colormap='bone_r',
+                    colornorm=None,
+                    edgecolor='none',
+                    reverse=False)
+
 
 def plot_trajectory(xpos, ypos, phi, color, ax=None, size_radius=None, nskip=0,
                     colormap='bone_r', colornorm=None, edgecolor='none', reverse=False):
@@ -249,22 +263,6 @@ def plot_trajectory(xpos, ypos, phi, color, ax=None, size_radius=None, nskip=0,
     ax.set_ylim(ypos.min() - 0.2 * yrange, ypos.max() + 0.2 * yrange)
 
     # fifi.mpl_functions.adjust_spines(ax, [])
-
-
- def plot_trajectory_fly(df):
-     fig, ax = plt.subplots()
-     plot_trajectory(df.xpos.values,
-                     df.ypos.values,
-                     df.phi.values,
-                     df.time.values,
-                     ax=ax,
-                     size_radius=None,
-                     nskip=0,
-                     colormap='bone_r',
-                     colornorm=None,
-                     edgecolor='none',
-                     reverse=False)
-
 
 
 def pi_yaxis(ax=0.5, tickpispace=0.5, lim=None, real_lim=None):
